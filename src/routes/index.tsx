@@ -29,16 +29,8 @@ function Index() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background">
-        <img
-          src={heroBottle}
-          alt="Black glass perfume bottle with chrome cap under studio lighting"
-          width={1280}
-          height={1600}
-          className="pointer-events-none absolute inset-0 mx-auto h-full w-auto max-w-none object-cover opacity-70"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,var(--background)_78%)]" />
-        <div className="relative z-10 px-6 pt-28 text-center">
+      <section className="relative flex min-h-screen flex-col overflow-hidden bg-background pt-32">
+        <div className="relative z-10 px-6 text-center">
           <Reveal>
             <p className="track-luxe text-[10px] text-chrome-dark">EXTRAIT DE PARFUM</p>
           </Reveal>
@@ -55,7 +47,7 @@ function Index() {
             </p>
           </Reveal>
           <Reveal delay={480}>
-            <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
               <a
                 href="#collection"
                 className="chrome-frame bg-background/60 px-10 py-5 text-[10px] tracking-[0.3em] text-chrome backdrop-blur-sm transition-colors duration-700 hover:text-chrome-bright"
@@ -70,6 +62,17 @@ function Index() {
               </Link>
             </div>
           </Reveal>
+        </div>
+        <div className="relative mt-[-2rem] flex flex-1 items-end justify-center">
+          <img
+            src={heroBottle}
+            alt="Black glass perfume bottle with chrome cap under studio lighting"
+            width={1280}
+            height={1600}
+            className="pointer-events-none h-[58vh] w-auto object-contain opacity-90"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,transparent_25%,var(--background)_82%)]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
         </div>
       </section>
 
