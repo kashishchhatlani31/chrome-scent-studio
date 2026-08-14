@@ -25,6 +25,9 @@
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
+  --color-chrome: var(--chrome);
+  --color-chrome-bright: var(--chrome-bright);
+  --color-chrome-dark: var(--chrome-dark);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
