@@ -70,7 +70,7 @@
 }
 
 :root {
-  --radius: 0.125rem;
+  --radius: 0.25rem;
   /* jet black #050505 */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.965 0 0);
@@ -174,5 +174,111 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-background);
+  }
+
+  ::selection {
+    background: oklch(0.833 0 0 / 0.25);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(0.145 0 0);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, oklch(0.45 0 0), oklch(0.75 0 0));
+  }
+}
+
+/* ---------- Chrome / metal design utilities ---------- */
+
+@utility chrome-text {
+  background-image: var(--gradient-chrome);
+  background-size: 250% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: chrome-sweep 9s ease-in-out infinite;
+}
+
+@utility chrome-text-static {
+  background-image: var(--gradient-chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility chrome-rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(0.833 0 0 / 0.55),
+    transparent
+  );
+}
+
+@utility metal-surface {
+  background-image: var(--gradient-metal-surface);
+}
+
+@utility chrome-frame {
+  border: 1px solid oklch(0.833 0 0 / 0.18);
+  transition:
+    border-color var(--transition-luxe),
+    box-shadow var(--transition-luxe);
+  &:hover {
+    border-color: oklch(0.833 0 0 / 0.55);
+    box-shadow: var(--glow-chrome);
+  }
+}
+
+@utility track-luxe {
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes chrome-sweep {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes luxe-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility reveal {
+  opacity: 0;
+  &[data-visible="true"] {
+    animation: luxe-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 }
