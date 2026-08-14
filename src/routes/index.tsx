@@ -63,15 +63,14 @@ function Index() {
             </div>
           </Reveal>
         </div>
-        <div className="relative mt-[-2rem] flex flex-1 items-end justify-center">
+        <div className="relative flex flex-1 items-center justify-center">
           <img
             src={heroBottle}
             alt="Black glass perfume bottle with chrome cap under studio lighting"
             width={1280}
             height={1600}
-            className="pointer-events-none h-[58vh] w-auto object-contain opacity-90"
+            className="pointer-events-none h-[56vh] w-auto object-contain opacity-90 [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_82%)]"
           />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,transparent_25%,var(--background)_82%)]" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
         </div>
       </section>
