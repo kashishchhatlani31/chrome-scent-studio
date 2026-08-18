@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { inr, savings, type Product } from "@/data/products";
 
 export function ProductCard({ product }: { product: Product }) {
-  const entry = product.sizes[0];
+  const entry = product.sizes[0]!;
   const { percent } = savings(entry.mrp, entry.price);
   return (
     <article className="group chrome-frame metal-surface relative flex h-full flex-col overflow-hidden">

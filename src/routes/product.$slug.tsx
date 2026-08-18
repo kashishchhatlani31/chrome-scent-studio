@@ -5,7 +5,8 @@ import { toast } from "sonner";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
 import { ProductCard } from "@/components/site/ProductCard";
-import { products, getProduct, type Product } from "@/data/products";
+import { PriceBlock } from "@/components/site/PriceBlock";
+import { products, getProduct, inr, type Product } from "@/data/products";
 
 export const Route = createFileRoute("/product/$slug")({
   loader: ({ params }) => {
@@ -35,8 +36,6 @@ export const Route = createFileRoute("/product/$slug")({
   component: ProductPage,
 });
 
-const sizes = ["30 ML", "50 ML", "100 ML"];
-
 function Notes({ product }: { product: Product }) {
   const groups = [
     { title: "TOP NOTES", list: product.notes.top },
@@ -63,8 +62,9 @@ function Notes({ product }: { product: Product }) {
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
-  const [size, setSize] = useState(sizes[1]);
+  const [sizeIndex, setSizeIndex] = useState(2);
   const [qty, setQty] = useState(1);
+  const size = product.sizes[sizeIndex] ?? product.sizes[0]!;
 
   const related = products.filter((p) => p.slug !== product.slug);
 
@@ -72,14 +72,38 @@ function ProductPage() {
     <SiteLayout>
       <section className="px-6 pt-36 pb-28 lg:px-12">
         <div className="mx-auto grid max-w-[1600px] gap-16 lg:grid-cols-2">
-          <Reveal className="bg-black">
-            <img
-              src={product.image}
-              alt={`${product.name} perfume bottle`}
-              width={1024}
-              height={1280}
-              className="h-full max-h-[860px] w-full object-cover"
-            />
+          <Reveal>
+            <div className="bg-black">
+              <img
+                src={product.packImage}
+                alt={`${product.name} matte black bottle with chrome cap beside its matching matte black outer box`}
+                width={1024}
+                height={1280}
+                className="h-full max-h-[860px] w-full object-cover"
+              />
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              <div className="bg-black">
+                <img
+                  src={product.image}
+                  alt={`${product.name} bottle detail`}
+                  loading="lazy"
+                  width={1024}
+                  height={1280}
+                  className="h-56 w-full object-cover"
+                />
+              </div>
+              <div className="bg-black">
+                <img
+                  src={product.moodImage}
+                  alt={`${product.mood} mood imagery`}
+                  loading="lazy"
+                  width={1024}
+                  height={1280}
+                  className="h-56 w-full object-cover opacity-80"
+                />
+              </div>
+            </div>
           </Reveal>
 
           <Reveal delay={140} className="lg:py-10">
@@ -95,7 +119,12 @@ function ProductPage() {
             <p className="mt-4 text-[11px] tracking-[0.28em] text-chrome-dark">
               {product.family.toUpperCase()}
             </p>
-            <p className="mt-8 font-serif text-3xl text-chrome">${product.price}</p>
+            <div className="mt-8">
+              <PriceBlock mrp={size.mrp} price={size.price} size="lg" />
+            </div>
+            <p className="mt-4 text-[10px] tracking-[0.2em] text-chrome-dark">
+              MRP {inr(size.mrp)} INCL. OF ALL TAXES · FREE SHIPPING
+            </p>
             <p className="mt-8 max-w-md text-sm leading-relaxed font-light text-muted-foreground">
               {product.description}
             </p>
@@ -105,21 +134,29 @@ function ProductPage() {
             <div className="mt-12 flex flex-wrap items-center gap-10">
               <div>
                 <p className="track-luxe text-[10px] text-chrome-dark">SIZE</p>
-                <div className="mt-4 flex gap-3">
-                  {sizes.map((s) => (
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {product.sizes.map((s, i) => (
                     <button
-                      key={s}
-                      onClick={() => setSize(s)}
-                      className={`border px-5 py-3 text-[10px] tracking-[0.2em] transition-all duration-500 ${
-                        size === s
+                      key={s.label}
+                      onClick={() => setSizeIndex(i)}
+                      className={`border px-5 py-3 text-left transition-all duration-500 ${
+                        sizeIndex === i
                           ? "border-chrome text-chrome-bright"
                           : "border-border text-muted-foreground hover:border-chrome/50"
                       }`}
                     >
-                      {s}
+                      <span className="block text-[10px] tracking-[0.2em]">{s.label}</span>
+                      <span className="mt-1 block text-[11px] font-light">
+                        {inr(s.price)}
+                      </span>
                     </button>
                   ))}
                 </div>
+                {size.note && (
+                  <p className="mt-3 text-[10px] tracking-[0.2em] text-chrome-dark">
+                    {size.note.toUpperCase()}
+                  </p>
+                )}
               </div>
               <div>
                 <p className="track-luxe text-[10px] text-chrome-dark">QUANTITY</p>
@@ -146,7 +183,9 @@ function ProductPage() {
             <div className="mt-12 flex items-center gap-4">
               <button
                 onClick={() =>
-                  toast(`${qty} × ${product.name} (${size}) added to cart`)
+                  toast(
+                    `${qty} × ${product.name} (${size.label}) added to cart — ${inr(size.price * qty)}`,
+                  )
                 }
                 className="chrome-frame flex-1 py-6 text-[10px] tracking-[0.35em] text-chrome transition-colors duration-700 hover:text-chrome-bright"
               >
@@ -159,6 +198,19 @@ function ProductPage() {
               >
                 <Heart strokeWidth={1} className="h-4 w-4" />
               </button>
+            </div>
+
+            <div className="chrome-frame mt-10 grid gap-4 p-8 sm:grid-cols-3">
+              {[
+                ["MATTE BLACK GLASS", "Soft-touch bottle, no fingerprints"],
+                ["POLISHED CHROME CAP", "Weighted metal, engraved mark"],
+                ["MATCHING BOX", "Rigid black board, silver foil type"],
+              ].map(([t, d]) => (
+                <div key={t}>
+                  <p className="text-[9px] tracking-[0.25em] text-chrome">{t}</p>
+                  <p className="mt-2 text-xs font-light text-muted-foreground">{d}</p>
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>
