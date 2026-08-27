@@ -1,15 +1,15 @@
-import bottle1 from "@/assets/bottle-1.jpg";
-import bottle2 from "@/assets/bottle-2.jpg";
-import bottle3 from "@/assets/bottle-3.jpg";
-import bottle4 from "@/assets/bottle-4.jpg";
-import moodVanilla from "@/assets/mood-vanilla.jpg";
-import moodWaves from "@/assets/mood-waves.jpg";
-import moodFloral from "@/assets/mood-floral.jpg";
-import moodFruity from "@/assets/mood-fruity.jpg";
-import packVanilla from "@/assets/pack-vanilla.jpg";
-import packWaves from "@/assets/pack-waves.jpg";
-import packFloral from "@/assets/pack-floral.jpg";
-import packFruity from "@/assets/pack-fruity.jpg";
+import bottle1 from "@/assets/bottle-1.webp";
+import bottle2 from "@/assets/bottle-2.webp";
+import bottle3 from "@/assets/bottle-3.webp";
+import bottle4 from "@/assets/bottle-4.webp";
+import moodVanilla from "@/assets/mood-vanilla.webp";
+import moodWaves from "@/assets/mood-waves.webp";
+import moodFloral from "@/assets/mood-floral.webp";
+import moodFruity from "@/assets/mood-fruity.webp";
+import packVanilla from "@/assets/pack-vanilla.webp";
+import packWaves from "@/assets/pack-waves.webp";
+import packFloral from "@/assets/pack-floral.webp";
+import packFruity from "@/assets/pack-fruity.webp";
 
 export type SizeOption = {
   ml: 10 | 30 | 50 | 100;

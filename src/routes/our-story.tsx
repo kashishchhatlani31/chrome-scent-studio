@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Reveal } from "@/components/site/Reveal";
-import experienceImg from "@/assets/experience.jpg";
+import experienceImg from "@/assets/experience.webp";
 
 const title = "Our Story — The House of AURVM";
 const description =
