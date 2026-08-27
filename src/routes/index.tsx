@@ -70,10 +70,13 @@ function Index() {
           <img
             src={heroBottle}
             alt="Black glass perfume bottle with chrome cap under studio lighting"
-            width={1280}
-            height={1600}
+            width={1120}
+            height={1400}
+            fetchPriority="high"
+            decoding="async"
             className="pointer-events-none h-[56vh] w-auto object-contain opacity-90 [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_82%)]"
           />
+
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
         </div>
       </section>
