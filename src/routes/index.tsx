@@ -6,9 +6,9 @@ import { Quiz } from "@/components/site/Quiz";
 import { products } from "@/data/products";
 import { bundles } from "@/data/bundles";
 import { PriceBlock } from "@/components/site/PriceBlock";
-import packVanilla from "@/assets/pack-vanilla.jpg";
-import heroBottle from "@/assets/hero-bottle.jpg";
-import experienceImg from "@/assets/experience.jpg";
+import packVanilla from "@/assets/pack-vanilla.webp";
+import heroBottle from "@/assets/hero-bottle.webp";
+import experienceImg from "@/assets/experience.webp";
 
 const title = "AURVM — Your Scent. Your Signature.";
 const description =

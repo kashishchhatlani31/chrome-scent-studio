@@ -1,6 +1,6 @@
-import bundleDuo from "@/assets/bundle-duo.jpg";
-import bundleDiscovery from "@/assets/bundle-discovery.jpg";
-import bundleCollection from "@/assets/bundle-collection.jpg";
+import bundleDuo from "@/assets/bundle-duo.webp";
+import bundleDiscovery from "@/assets/bundle-discovery.webp";
+import bundleCollection from "@/assets/bundle-collection.webp";
 
 export type Bundle = {
   slug: string;
